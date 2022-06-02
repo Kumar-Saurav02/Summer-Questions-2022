@@ -1,0 +1,58 @@
+Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect. If the two linked lists have no intersection at
+all, return null.
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int leng(ListNode *head)
+	{
+		int l = 1;
+		while (head)
+		{
+			l++;
+			head = head->next;
+		}
+		return l;
+	}
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
+    {
+        int n = leng(headA);
+		int m = leng(headB);
+		int d;
+		ListNode *headlon, *headsho;
+		if (n > m)
+		{
+			headlon = headA;
+			headsho = headB;
+			d = n - m;
+		}
+		else
+		{
+			headlon = headB;
+			headsho = headA;
+			d = m - n;
+		}
+		for (int i = 0; i <d; i++)
+		{
+			headlon=headlon->next;
+		}
+		while (headlon&& headsho)
+		{
+			if (headlon == headsho)
+			{
+				return headlon;
+			}
+			headlon=headlon->next;
+            headsho=headsho->next;
+		}
+		return NULL;
+		
+	}
+};
