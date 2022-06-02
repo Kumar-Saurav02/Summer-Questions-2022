@@ -1,0 +1,35 @@
+Given the head of a linked list, return the list after sorting it in ascending order.
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* sortList(ListNode* head) 
+    {
+       ListNode *current=head;
+		vector<int> fill;
+		while (current)
+		{
+			fill.push_back(current->val);
+			current=current->next;
+		}
+		current=head;
+		sort(fill.begin(), fill.end());
+		int i=0;
+		while (current)
+		{
+			current->val=fill.at(i);
+			i++;
+			current=current->next;
+		}
+		return head;  
+    }
+};
